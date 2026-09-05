@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/image__1_-removebg-preview.png" id="favicon-main" />
+    <link rel="shortcut icon" type="image/png" href="/image__1_-removebg-preview.png" id="favicon-shortcut" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/image__1_-removebg-preview.png" id="favicon-apple" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#12151A" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F5F1E8" media="(prefers-color-scheme: light)" />
+    <title>Pixelated — Wall Art Prints</title>
+    <script>
+      // No-flash theme init: apply stored or system preference before paint.
+      (function () {
+        try {
+          var stored = localStorage.getItem('sf_theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = stored ? stored === 'dark' : prefersDark;
+          var root = document.documentElement;
+          root.classList.toggle('dark', dark);
+          root.classList.toggle('light', !dark);
+          var icon = dark ? '/image-removebg-preview.png' : '/image__1_-removebg-preview.png';
+          ['favicon-main', 'favicon-shortcut', 'favicon-apple'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.href = icon;
+          });
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="description" content="Premium wall art prints on metal, wood and canvas. Anime, movies, sports, home decor, Marvel/DC and custom prints." />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
