@@ -9,24 +9,14 @@ interface ProductPhotoProps {
   rounded?: boolean;
 }
 
-function slugify(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
-
 export default function ProductPhoto({ product, angle = 1, className = '', rounded = true }: ProductPhotoProps) {
   const [failed, setFailed] = useState(false);
 
-  const slug = slugify(product.name);
   const suffix = angle === 1 ? '' : `-${angle}`;
-  const path = `${product.category}/${slug}${suffix}.jpg`;
+  const path = `${product.category}/${product.id}${suffix}.jpg`;
   const url = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${path}`;
 
   if (failed) {
-    // No real photo uploaded yet (or it 404'd) — fall back to the
-    // existing generated placeholder art, exactly as before.
     return (
       <Artwork
         palette={product.palette}
