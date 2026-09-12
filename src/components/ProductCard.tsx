@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { type Product, startingPrice, availableVariants } from '@/products';
 import { formatPrice, getCategory } from '@/config';
 import { isProductAvailable } from '@/availability';
-import Artwork from './Artwork';
+import ProductPhoto from './ProductPhoto';
 
 export default function ProductCard({ product }: { product: Product }) {
   const cat = getCategory(product.category);
@@ -12,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link to={`/product/${product.id}`} className="group block">
       <div className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover:border-brass-500/40' : ''}`}>
         <div className="aspect-[4/5] overflow-hidden">
-          <Artwork palette={product.palette} motif={product.motif} seed={product.photos[0]} className="h-full w-full transition-transform duration-500 group-hover:scale-105" />
+          <ProductPhoto product={product} className="h-full w-full transition-transform duration-500 group-hover:scale-105" />
         </div>
 
         {/* Gray overlay when unavailable */}
