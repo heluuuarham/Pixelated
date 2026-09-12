@@ -8,7 +8,7 @@ import { getCategory, formatPrice, standardBorderColors } from '@/config';
 import { isProductAvailable, isCategoryAvailable, isVariantAvailable, purchasableVariants } from '@/availability';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
-import Artwork from '@/components/Artwork';
+import ProductPhoto from '@/components/ProductPhoto';
 import ProductCard from '@/components/ProductCard';
 import { ChevronRight, Check, Minus, Plus, Truck, Shield, RotateCcw, Frame, Image, Layers, AlertCircle } from 'lucide-react';
 
@@ -70,7 +70,6 @@ export default function Product() {
   const productAvailable = isProductAvailable(product);
   const categoryAvailable = isCategoryAvailable(product.category);
 
-  // Resolve effective variant — must be purchasable, fall back to first purchasable
   const effectiveVariant: VariantType = purchasable.includes(variantType) ? variantType : (purchasable[0] ?? variants[0] ?? 'framed');
   const variantInfo = product.variants[effectiveVariant];
   const sizes = variantInfo?.sizes ?? [];
@@ -133,7 +132,7 @@ export default function Product() {
         <div>
           <div className="relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800">
             <div className="aspect-[4/5]">
-              <Artwork palette={product.palette} motif={product.motif} seed={product.photos[activeImg]} className="h-full w-full" />
+              <ProductPhoto product={product} angle={activeImg + 1} className="h-full w-full" />
             </div>
             <div className="absolute left-3 top-3 rounded-sm bg-black/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-brass-400 backdrop-blur">
               {effectiveVariant === 'framed' ? 'Framed' : effectiveVariant === 'canvas' ? 'Canvas' : 'Metal'}
@@ -150,7 +149,7 @@ export default function Product() {
                 className={`overflow-hidden rounded-sm border-2 transition-colors ${activeImg === i ? 'border-brass-500' : 'border-ink-100/10 hover:border-ink-100/30'}`}
               >
                 <div className="aspect-[4/5]">
-                  <Artwork palette={product.palette} motif={product.motif} seed={img} className="h-full w-full" />
+                  <ProductPhoto product={product} angle={i + 1} className="h-full w-full" />
                 </div>
               </button>
             ))}
@@ -305,7 +304,7 @@ export default function Product() {
                 {adding ? 'Adding…' : `Add to Cart · ${formatPrice(total)}`}
               </span>
               <div ref={flyRef} className="pointer-events-none absolute left-0 top-0 h-16 w-16 opacity-0">
-                <Artwork palette={product.palette} motif={product.motif} seed={product.id} className="h-full w-full rounded-sm" />
+                <ProductPhoto product={product} angle={1} className="h-full w-full rounded-sm" />
               </div>
             </button>
           </div>
