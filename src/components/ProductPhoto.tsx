@@ -4,7 +4,7 @@ import { type Product } from '@/products';
 
 interface ProductPhotoProps {
   product: Product;
-  angle?: number;        // 1 = main photo, 2/3/4 = extra angles
+  angle?: number;
   className?: string;
   rounded?: boolean;
 }
