@@ -17,9 +17,9 @@ export default function Footer() {
             </Link>
             <p className="mt-4 max-w-sm text-sm text-ink-400">{site.tagline} Premium wall art prints as glass-front framed prints or gallery-wrapped canvas. Made for your walls, shipped across Pakistan.</p>
             <div className="mt-5 flex gap-3">
-              <a href="#" className="grid h-9 w-9 place-items-center rounded-sm border border-ink-100/15 text-ink-300 hover:border-brass-500 hover:text-brass-400 transition-colors"><Instagram size={16} /></a>
+              <a href="https://www.instagram.com/pixelated_pk/" target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-sm border border-ink-100/15 text-ink-300 hover:border-brass-500 hover:text-brass-400 transition-colors"><Instagram size={16} /></a>
               <a href={`mailto:${site.email}`} className="grid h-9 w-9 place-items-center rounded-sm border border-ink-100/15 text-ink-300 hover:border-brass-500 hover:text-brass-400 transition-colors"><Mail size={16} /></a>
-              <a href={`tel:${site.whatsapp}`} className="grid h-9 w-9 place-items-center rounded-sm border border-ink-100/15 text-ink-300 hover:border-brass-500 hover:text-brass-400 transition-colors"><Phone size={16} /></a>
+              <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-sm border border-ink-100/15 text-ink-300 hover:border-brass-500 hover:text-brass-400 transition-colors"><Phone size={16} /></a>
             </div>
           </div>
 
