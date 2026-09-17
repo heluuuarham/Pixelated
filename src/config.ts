@@ -9,7 +9,7 @@
 export const site = {
   name: 'Pixelated',
   tagline: 'Wall Art That Speaks.',
-  whatsapp: '923272506521',
+  whatsapp: '923303007682',
   currency: 'Rs.',
   freeShippingThreshold: 5000,
   email: 'infopixelated.pk@gmail.com',
