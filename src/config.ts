@@ -12,7 +12,7 @@ export const site = {
   whatsapp: '923272506521',
   currency: 'Rs.',
   freeShippingThreshold: 5000,
-  email: 'hello@pixelated.pk',
+  email: 'infopixelated.pk@gmail.com',
 };
 
 // ============================================================
