@@ -158,7 +158,7 @@ export interface FormatCategory {
 
 export const formatCategories: FormatCategory[] = [
   { slug: 'frames-canvas', name: 'Frames & Canvas', tagline: 'Glass-front framed prints & gallery-wrapped canvas.', description: 'Every design is available as a glass-front framed print with your choice of border color, or as a gallery-wrapped canvas on a wooden frame. Premium materials, made to order.', gradient: ['#12233A', '#2A3F5E'], motif: 'shield', accent: '#C9A24B', link: '/categories/frames-canvas' },
-  { slug: 'square-frames-canvas', name: 'Frames & Canvas', tagline: 'Square-format framed prints & canvas.', description: 'The same great designs in a square format — glass-front framed prints with your choice of border color, or gallery-wrapped canvas on a wooden frame. Available in 8×8 and 12×12.', gradient: ['#1A3A5C', '#2D5A87'], motif: 'shield', accent: '#5B9BD5', link: '/categories/square-frames-canvas' },
+  { slug: 'square-frames-canvas', name: 'Square Format Frames & Canvas', tagline: 'Square-format framed prints & canvas.', description: 'The same great designs in a square format — glass-front framed prints with your choice of border color, or gallery-wrapped canvas on a wooden frame. Available in 8×8 and 12×12.', gradient: ['#1A3A5C', '#2D5A87'], motif: 'shield', accent: '#5B9BD5', link: '/categories/square-frames-canvas' },
   { slug: 'metal-poster', name: 'Metal Poster', tagline: 'Brushed aluminium prints with vivid color.', description: 'High-contrast prints on brushed aluminium — deep blacks, bright highlights, a modern edge.', gradient: ['#475569', '#1E293B'], motif: 'burst', accent: '#94A3B8', link: '/categories/metal-poster' },
 ];
 
