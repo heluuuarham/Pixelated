@@ -320,6 +320,65 @@ export default function Product() {
           </div>
           )}
 
+                    {/* Size selector */}
+          {sizes.length > 0 && (
+            <div className="mt-6">
+              <p className="label">Size</p>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {sizes.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setSizeId(s.id)}
+                    className={`rounded-sm border py-2.5 text-center transition-all ${effectiveSizeId === s.id ? 'border-brass-500 bg-brass-500/10' : 'border-ink-100/15 hover:border-ink-100/30'}`}
+                  >
+                    <span className={`block font-mono text-xs font-bold ${effectiveSizeId === s.id ? 'text-brass-400' : 'text-ink-100'}`}>{s.label.split('·')[0].trim()}</span>
+                    <span className="mt-0.5 block text-[9px] text-ink-400">{s.label.split('·')[1]?.trim() ?? ''}</span>
+                    <span className="mt-0.5 block font-mono text-[10px] text-ink-300">{formatPrice(s.price)}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Qty + Add */}
+          {productAvailable ? (
+          <div className="mt-10 flex items-center gap-3 sm:mt-8">
+            <div className="flex items-center rounded-sm border border-ink-100/15">
+              <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="grid h-14 w-14 place-items-center text-ink-300 hover:text-brass-400 sm:h-12 sm:w-12"><Minus size={16} /></button>
+              <span className="w-10 text-center font-mono text-lg font-bold text-ink-50">{qty}</span>
+              <button onClick={() => setQty((q) => q + 1)} className="grid h-14 w-14 place-items-center text-ink-300 hover:text-brass-400 sm:h-12 sm:w-12"><Plus size={16} /></button>
+            </div>
+            <button onClick={handleAdd} disabled={adding} className="relative flex-1">
+              <span className="btn-primary w-full justify-center text-sm">
+                {adding ? 'Adding…' : `Add to Cart · ${formatPrice(total)}`}
+              </span>
+              <div ref={flyRef} className="pointer-events-none absolute left-0 top-0 h-16 w-16 opacity-0">
+                <ProductPhoto product={product} angle={1} className="h-full w-full rounded-sm" />
+              </div>
+            </button>
+          </div>
+          ) : (
+          <div className="mt-10 sm:mt-8">
+            <div className="flex items-center gap-3 rounded-sm border border-ink-100/15 bg-ink-900/30 px-5 py-4">
+              <AlertCircle size={20} className="text-ink-300" />
+              <div>
+                <p className="font-display text-lg text-ink-50">Not Available</p>
+                <p className="mt-0.5 text-sm text-ink-400">This product is currently out of stock or its collection is unavailable. Please check back soon.</p>
+              </div>
+            </div>
+          </div>
+          )}
+
+          {/* Size chart image */}
+          {product.sizeChartImage && (
+            <div className="mt-10">
+              <p className="label">Size Chart</p>
+              <div className="overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800">
+                <img src={product.sizeChartImage} alt={`${product.name} size chart`} className="h-auto w-full" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              </div>
+            </div>
+          )}
+
           {/* Trust badges */}
           <div className="mt-10 grid grid-cols-3 gap-3 border-t border-ink-100/10 pt-8 sm:mt-8 sm:pt-6">
             {[
