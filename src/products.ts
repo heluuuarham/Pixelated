@@ -319,7 +319,11 @@ export const products: Product[] = rawProducts.map((rp, i) => ({
   ...rp,
   id: `p${String(i + 1).padStart(3, '0')}`,
   photos: [0, 1, 2, 3].map((n) => `${i + 1}-${n}`),
-  sizeChartImage: '/size-charts/default.png',
+  sizeChartImage: metalSlugs.includes(rp.category)
+    ? '/size-charts/metal.png'
+    : squareSlugs.includes(rp.category)
+      ? '/size-charts/square.png'
+      : '/size-charts/rectangle.png',
 }));
 
 // ============================================================
