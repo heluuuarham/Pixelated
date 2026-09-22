@@ -316,7 +316,7 @@ export default function Product() {
               <div className="overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800">
                 <img src={product.sizeChartImage} alt={`${product.name} size chart`} className="h-auto w-full" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
               </div>
-              <p className="mt-2 font-mono text-[10px] text-ink-400">Add your size chart image to: public/size-charts/</p>
+              
             </div>
           )}
 
