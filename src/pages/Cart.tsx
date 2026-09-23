@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useCart, getProductForCart } from '@/context/CartContext';
 import { formatPrice, site, standardBorderColors } from '@/config';
 import Artwork from '@/components/Artwork';
+import ProductPhoto from '@/components/ProductPhoto';
 import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, ChevronRight, Truck } from 'lucide-react';
 
 export default function Cart() {
@@ -64,7 +65,11 @@ export default function Cart() {
                 <div key={i} className="flex gap-4 p-5 sm:p-4">
                   <Link to={`/product/${item.productId}`} className="shrink-0">
                     <div className="h-28 w-22 overflow-hidden rounded-sm border border-ink-100/10">
-                      <Artwork palette={palette} motif={motif} seed={item.productId} className="h-full w-full" />
+                      {product ? (
+                        <ProductPhoto product={product} className="h-full w-full" />
+                      ) : (
+                        <Artwork palette={palette} motif={motif} seed={item.productId} className="h-full w-full" />
+                      )}
                     </div>
                   </Link>
                   <div className="flex flex-1 flex-col">
