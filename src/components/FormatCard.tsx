@@ -11,13 +11,19 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
   const available = isFormatAvailable(format.slug);
 
   return (
-    <Link to={link} className="group block">
+    <Link
+      to={link}
+      className="group/card relative block transition-all duration-300 group-hover/list:opacity-50 hover:!opacity-100 hover:!scale-[1.02] hover:z-10"
+    >
+      {/* Glow */}
+      <div className="pointer-events-none absolute -inset-1 rounded-sm bg-brass-500/0 blur-xl transition-all duration-300 group-hover/card:bg-brass-500/25" />
+
       <div
-        className={`group relative block overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'hover:border-brass-500/40' : ''} aspect-[16/9] sm:aspect-[4/5]`}
+        className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover/card:border-brass-500/40' : ''} aspect-[16/9] sm:aspect-[4/5]`}
       >
         {/* Background gradient */}
         <div
-          className="absolute inset-0 opacity-90 transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 opacity-90 transition-transform duration-500 group-hover/card:scale-105"
           style={{ backgroundImage: `linear-gradient(135deg, ${format.gradient[0]}, ${format.gradient[1]})` }}
         />
         {/* Sample art peeking */}
@@ -41,7 +47,7 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
             <span className={`rounded-sm px-2 py-1 font-mono text-[10px] uppercase tracking-widest backdrop-blur ${available ? 'bg-black/50 text-white' : 'bg-ink-900/80 text-ink-300'}`}>
               {available ? 'Shop Now' : 'Not Available'}
             </span>
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-black/50 text-white backdrop-blur transition-all duration-300 group-hover:bg-brass-500 group-hover:text-workshop-900">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-black/50 text-white backdrop-blur transition-all duration-300 group-hover/card:bg-brass-500 group-hover/card:text-workshop-900">
               <ArrowUpRight size={18} />
             </span>
           </div>
