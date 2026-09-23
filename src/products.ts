@@ -50,7 +50,39 @@ export interface Product {
                                        //   Then reference it as: "/size-charts/your-image.png"
   inStock: boolean;                   // false = hidden from storefront, data kept for later
   tags: string[];                     // used for AI recommendations
+  featured?: boolean;                 // true = shown in the homepage "Featured Prints" section
+                                       //   Set automatically from `featuredProductNames` below —
+                                       //   you don't need to edit this field directly.
 }
+
+// ============================================================
+//  FEATURED PRODUCTS — controls the homepage "Featured Prints" section
+//
+//  Just list the exact `name` of any product below to feature it.
+//  Reorder, add, or remove names any time you want to change what's
+//  featured — no other code needs to change. Update this weekly
+//  based on trends/sales.
+//
+//  HOW MANY SHOW ON THE HOMEPAGE:
+//    Controlled by `featuredCount` below, NOT by the length of this list.
+//      - List FEWER names than featuredCount → Home.tsx fills the rest
+//        with other in-stock products so the section never looks empty.
+//      - List MORE names than featuredCount → only the first
+//        `featuredCount` names are shown (in the order listed here).
+//    Change `featuredCount` any time — no other code needs to change.
+// ============================================================
+export const featuredCount: number = 8;
+
+export const featuredProductNames: string[] = [
+  'Crimson Dawn',
+  'Ocean of Stars',
+  'Thunder Step',
+  'Silent Sakura',
+  'Iron Resolve',
+  'Fox Spirit',
+  'Blade of Dawn',
+  'Moonlit Vow',
+];
 
 // ============================================================
 //  PRODUCT DATA — edit/add/remove items here
@@ -77,7 +109,7 @@ function p(
   framedSizes: string[] | null, canvasSizes: string[] | null,
   tags: string[], inStock = true,
   framedBorderColors?: BorderColor[],
-): Omit<Product, 'id' | 'photos' | 'sizeChartImage'> {
+): Omit<Product, 'id' | 'photos' | 'sizeChartImage' | 'featured'> {
   const variants: Product['variants'] = {};
 
   if (framesCanvasSlugs.includes(category)) {
@@ -106,7 +138,7 @@ function p(
   return { category, name, description, variants, palette, motif, inStock, tags };
 }
 
-const rawProducts: Omit<Product, 'id' | 'photos' | 'sizeChartImage'>[] = [
+const rawProducts: Omit<Product, 'id' | 'photos' | 'sizeChartImage' | 'featured'>[] = [
   // ---- ANIME ----
   p('anime', 'Crimson Dawn', 'A lone swordsman stands silhouetted against the rising sun, blade drawn and resolve hardened. This piece captures that breathless moment before the battle begins — the calm before the storm. Printed on premium metal with a glass-front frame.', ['#7F1D1D', '#FBBF24', '#1E293B'], 'burst', ['a5', 'a4', 'a3'], ['a4', 'a3', '16x20'], ['action', 'solo', 'sunrise']),
   p('anime', 'Ocean of Stars', 'A girl reaches toward a sky filled with constellations, her hair caught in an impossible wind. The colour palette moves from deep ocean blues to warm starlight yellows. Gallery-wrapped canvas on a wooden frame.', ['#0EA5E9', '#1E3A8A', '#FDE68A'], 'burst', ['a4', 'a3', '16x20'], ['a4', 'a3', '16x20'], ['sky', 'dream', 'blue']),
@@ -307,6 +339,7 @@ const rawProducts: Omit<Product, 'id' | 'photos' | 'sizeChartImage'>[] = [
 //  Photos: 4 generated angles per product (artwork seeds)
 //  sizeChartImage: default ruler graphic; override per item
 //  inStock: false items are filtered out of the storefront
+//  featured: set automatically from `featuredProductNames` above
 //
 //  SIZE CHART IMAGES:
 //    Put your image files in:  public/size-charts/
@@ -324,6 +357,7 @@ export const products: Product[] = rawProducts.map((rp, i) => ({
     : squareSlugs.includes(rp.category)
       ? '/size-charts/square.png'
       : '/size-charts/rectangle.png',
+  featured: featuredProductNames.includes(rp.name),
 }));
 
 // ============================================================
@@ -385,4 +419,29 @@ export function startingPrice(product: Product): number {
   if (product.variants.canvas) all.push(...product.variants.canvas.sizes.map((s) => s.price));
   if (product.variants.metal) all.push(...product.variants.metal.sizes.map((s) => s.price));
   return all.length ? Math.min(...all) : 0;
+}
+
+// ============================================================
+//  FEATURED-PRODUCTS SELECTOR — used by Home.tsx
+//
+//  Returns exactly `featuredCount` in-stock products:
+//    1. Named products from `featuredProductNames`, in that order
+//       (capped at featuredCount if the list is longer)
+//    2. If that's short of featuredCount, filled with other
+//       in-stock products (not already included), in catalog order
+//
+//  Home.tsx should call this instead of doing its own slice(0, 8).
+// ============================================================
+export function getFeaturedProducts(): Product[] {
+  const named = featuredProductNames
+    .map((name) => products.find((p) => p.name === name && p.inStock))
+    .filter((p): p is Product => Boolean(p))
+    .slice(0, featuredCount);
+
+  if (named.length >= featuredCount) return named;
+
+  const usedIds = new Set(named.map((p) => p.id));
+  const fillers = products.filter((p) => p.inStock && !usedIds.has(p.id));
+
+  return [...named, ...fillers.slice(0, featuredCount - named.length)];
 }
