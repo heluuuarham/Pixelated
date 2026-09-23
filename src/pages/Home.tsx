@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { formatCategories, site } from '@/config';
-import { products } from '@/products';
+import { products, getFeaturedProducts } from '@/products';
 import { allFormatCategories } from '@/availability';
 import FormatCard from '@/components/FormatCard';
 import ProductCard from '@/components/ProductCard';
@@ -8,7 +8,7 @@ import Artwork from '@/components/Artwork';
 import { ArrowRight, Truck, Shield, Palette, Sparkles, Frame, Image as ImageIcon } from 'lucide-react';
 
 export default function Home() {
-  const featured = products.filter((p) => p.inStock).slice(0, 8);
+  const featured = getFeaturedProducts();
   const heroArt = products.filter((p) => p.inStock)[0] ?? products[0];
 
   return (
