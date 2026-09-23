@@ -51,7 +51,7 @@ export interface Product {
   inStock: boolean;                   // false = hidden from storefront, data kept for later
   tags: string[];                     // used for AI recommendations
   featured?: boolean;                 // true = shown in the homepage "Featured Prints" section
-                                       //   Set automatically from `featuredProductNames` below —
+                                       //   Set automatically from `featuredProductIds` below —
                                        //   you don't need to edit this field directly.
 }
 
@@ -65,23 +65,23 @@ export interface Product {
 //
 //  HOW MANY SHOW ON THE HOMEPAGE:
 //    Controlled by `featuredCount` below, NOT by the length of this list.
-//      - List FEWER names than featuredCount → Home.tsx fills the rest
+//      - List FEWER ids than featuredCount → Home.tsx fills the rest
 //        with other in-stock products so the section never looks empty.
-//      - List MORE names than featuredCount → only the first
-//        `featuredCount` names are shown (in the order listed here).
+//      - List MORE ids than featuredCount → only the first
+//        `featuredCount` ids are shown (in the order listed here).
 //    Change `featuredCount` any time — no other code needs to change.
 // ============================================================
 export const featuredCount: number = 8;
 
-export const featuredProductNames: string[] = [
-  'Crimson Dawn',
-  'Ocean of Stars',
-  'Thunder Step',
-  'Silent Sakura',
-  'Iron Resolve',
-  'Fox Spirit',
-  'Blade of Dawn',
-  'Moonlit Vow',
+export const featuredProductIds: string[] = [
+  'p123', // Crimson Dawn
+  'p062', // Ocean of Stars
+  'p113', // Thunder Step
+  'p074', // Silent Sakura
+  'p005', // Iron Resolve
+  'p046', // Fox Spirit
+  'p067', // Blade of Dawn
+  'p008', // Moonlit Vow
 ];
 
 // ============================================================
@@ -339,7 +339,7 @@ const rawProducts: Omit<Product, 'id' | 'photos' | 'sizeChartImage' | 'featured'
 //  Photos: 4 generated angles per product (artwork seeds)
 //  sizeChartImage: default ruler graphic; override per item
 //  inStock: false items are filtered out of the storefront
-//  featured: set automatically from `featuredProductNames` above
+//  featured: set automatically from `featuredProductIds` above
 //
 //  SIZE CHART IMAGES:
 //    Put your image files in:  public/size-charts/
@@ -348,17 +348,20 @@ const rawProducts: Omit<Product, 'id' | 'photos' | 'sizeChartImage' | 'featured'
 //    If you don't have one yet, it defaults to "/size-charts/default.png"
 //    (create that file or change the path below)
 // ============================================================
-export const products: Product[] = rawProducts.map((rp, i) => ({
-  ...rp,
-  id: `p${String(i + 1).padStart(3, '0')}`,
-  photos: [0, 1, 2, 3].map((n) => `${i + 1}-${n}`),
-  sizeChartImage: metalSlugs.includes(rp.category)
-    ? '/size-charts/metal.png'
-    : squareSlugs.includes(rp.category)
-      ? '/size-charts/square.png'
-      : '/size-charts/rectangle.png',
-  featured: featuredProductNames.includes(rp.name),
-}));
+export const products: Product[] = rawProducts.map((rp, i) => {
+  const id = `p${String(i + 1).padStart(3, '0')}`;
+  return {
+    ...rp,
+    id,
+    photos: [0, 1, 2, 3].map((n) => `${i + 1}-${n}`),
+    sizeChartImage: metalSlugs.includes(rp.category)
+      ? '/size-charts/metal.png'
+      : squareSlugs.includes(rp.category)
+        ? '/size-charts/square.png'
+        : '/size-charts/rectangle.png',
+    featured: featuredProductIds.includes(id),
+  };
+});
 
 // ============================================================
 //  HELPER FUNCTIONS — used by components, no need to edit
@@ -425,7 +428,7 @@ export function startingPrice(product: Product): number {
 //  FEATURED-PRODUCTS SELECTOR — used by Home.tsx
 //
 //  Returns exactly `featuredCount` in-stock products:
-//    1. Named products from `featuredProductNames`, in that order
+//    1. Products from `featuredProductIds`, in that order
 //       (capped at featuredCount if the list is longer)
 //    2. If that's short of featuredCount, filled with other
 //       in-stock products (not already included), in catalog order
@@ -433,8 +436,8 @@ export function startingPrice(product: Product): number {
 //  Home.tsx should call this instead of doing its own slice(0, 8).
 // ============================================================
 export function getFeaturedProducts(): Product[] {
-  const named = featuredProductNames
-    .map((name) => products.find((p) => p.name === name && p.inStock))
+  const named = featuredProductIds
+    .map((id) => products.find((p) => p.id === id && p.inStock))
     .filter((p): p is Product => Boolean(p))
     .slice(0, featuredCount);
 
