@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { getProduct, productCode, productIndex, priceFor, type Product, type VariantType } from '@/products';
-import { getCategory } from '@/config';
+import { getProduct, productCode, priceFor, type Product, type VariantType } from '@/products';
 
 export interface CartItem {
   productId: string;
@@ -49,9 +48,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     (productId: string, variant: VariantType, sizeId: string, borderColorId: string | undefined, qty: number) => {
       const product = getProduct(productId);
       if (!product) return;
-      const cat = getCategory(product.category);
-      const idx = productIndex(product);
-      const code = productCode(cat?.code ?? 'GEN', idx, sizeId, variant, borderColorId);
+      const code = productCode(product, variant, sizeId, borderColorId);
       const unitPrice = priceFor(product, variant, sizeId, borderColorId);
 
       setItems((prev) => {
