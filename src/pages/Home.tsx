@@ -50,7 +50,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* Stats strip */}
+               {/* Stats strip */}
         <div className="shell relative pb-12 sm:pb-10">
           <div className="grid grid-cols-2 gap-5 border-t border-ink-100/10 pt-8 sm:gap-4 sm:pt-6 md:grid-cols-4">
             {[
@@ -60,10 +60,10 @@ export default function Home() {
               { icon: Shield, label: 'Quality Guaranteed', sub: 'Museum-grade print' },
             ].map((s, i) => (
               <div key={i} className="flex items-center gap-3 py-1">
-                <s.icon size={20} className="text-brass-500" />
+                <s.icon size={20} className="!text-brass-400" />
                 <div>
-                  <p className="font-mono text-xs font-bold uppercase tracking-wider text-ink-50">{s.label}</p>
-                  <p className="text-[11px] text-ink-400">{s.sub}</p>
+                  <p className="font-mono text-xs font-bold uppercase tracking-wider !text-white">{s.label}</p>
+                  <p className="text-[11px] !text-white/60">{s.sub}</p>
                 </div>
               </div>
             ))}
