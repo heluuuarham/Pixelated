@@ -16,16 +16,17 @@ export default function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Artwork palette={heroArt.palette} motif={heroArt.motif} seed="hero" className="h-full w-full" rounded={false} />
-          {/* Aurora — slow drifting color blobs, no mouse/video needed */}
-          <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-60 mix-blend-screen">
-            <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
-            <div className="aurora-blob aurora-blob-2" style={{ background: '#1E3A8A' }} />
-            <div className="aurora-blob aurora-blob-3" style={{ background: '#7C2D12' }} />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        </div>
+  <Artwork palette={heroArt.palette} motif={heroArt.motif} seed="hero" className="h-full w-full" rounded={false} />
+  <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+  {/* Aurora — slow drifting color blobs, on top so they glow through the dark overlay */}
+  <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-70 mix-blend-screen">
+    <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
+    <div className="aurora-blob aurora-blob-2" style={{ background: '#1E3A8A' }} />
+    <div className="aurora-blob aurora-blob-3" style={{ background: '#7C2D12' }} />
+  </div>
+</div>
+  
         <div className="shell relative flex min-h-[88vh] flex-col justify-center py-24 sm:py-20">
           <div className="max-w-2xl">
             <p className="eyebrow animate-fadeUp">Premium Wall Art Prints</p>
