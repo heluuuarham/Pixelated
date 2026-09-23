@@ -113,7 +113,28 @@ export default function Product() {
     }, 700);
   };
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "sku": code,
+    "category": category.name,
+    "brand": { "@type": "Brand", "name": "Pixelated" },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "PKR",
+      "price": unitPrice,
+      "availability": productAvailable
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      "url": `https://pixelatedpk.vercel.app/product/${product.id}`,
+    },
+  };
+
   return (
+    <>
+    <script type="application/ld+json">{JSON.stringify(productSchema)}</script>
     <div>
       {/* Breadcrumb */}
       <div className="shell pt-8 sm:pt-6">
@@ -350,5 +371,6 @@ export default function Product() {
         </div>
       </section>
     </div>
+    </>
   );
 }
