@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import {
-  getProduct, productIndex, productCode,
+  getProduct, productCode,
   priceFor, products, availableVariants, type Product, type VariantType,
 } from '@/products';
 import { getCategory, formatPrice, standardBorderColors } from '@/config';
@@ -80,8 +80,7 @@ export default function Product() {
     : undefined;
 
   const category = getCategory(product.category)!;
-  const idx = productIndex(product);
-  const code = productCode(category.code, idx, effectiveSizeId, effectiveVariant, effectiveBorderColorId);
+  const code = productCode(product, effectiveVariant, effectiveSizeId, effectiveBorderColorId);
   const unitPrice = priceFor(product, effectiveVariant, effectiveSizeId, effectiveBorderColorId);
   const total = unitPrice * qty;
 
