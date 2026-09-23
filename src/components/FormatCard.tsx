@@ -67,7 +67,7 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
             </span>
           </div>
           <div>
-            <p className="eyebrow mb-1">{format.tagline}</p>
+            <p className="eyebrow mb-1" style={{ color: '#e8b04b' }}>{format.tagline}</p>
             <h3 className="font-display leading-[0.95] text-white text-3xl">{format.name}</h3>
           </div>
         </div>
