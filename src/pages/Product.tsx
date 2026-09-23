@@ -120,6 +120,7 @@ export default function Product() {
     "description": product.description,
     "sku": code,
     "category": category.name,
+    "image": `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${product.category}/${product.id}.jpg`,
     "brand": { "@type": "Brand", "name": "Pixelated" },
     "offers": {
       "@type": "Offer",
