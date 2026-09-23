@@ -33,7 +33,7 @@ export default function Home() {
 
           <div className="shell relative flex min-h-[88vh] flex-col justify-center pt-40 pb-16 sm:pt-20 sm:pb-20">
           <div className="max-w-2xl">
-            <p className="eyebrow animate-fadeUp !text-brass-400">Premium Wall Art Prints</p>
+            <p className="eyebrow animate-fadeUp" style={{ color: '#e8b04b' }}>Premium Wall Art Prints</p>
             <h1 className="mt-4 font-display text-6xl leading-[0.9] text-white sm:text-7xl md:text-8xl" style={{ animationDelay: '0.1s' }}>
               Wall Art<br />That Speaks.
             </h1>
