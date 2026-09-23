@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group/card relative block transition-all duration-300 group-hover/list:opacity-50 hover:!opacity-100 hover:!scale-[1.02] hover:z-10"
     >
       {/* Glow */}
-      <div className="pointer-events-none absolute -inset-1 rounded-sm bg-brass-500/0 blur-xl transition-all duration-300 group-hover/card:bg-brass-500/25" />
+      <div className="pointer-events-none absolute -inset-3 rounded-lg bg-blue-900/0 blur-2xl transition-all duration-500 group-hover/card:bg-blue-900/50 dark:bg-brass-500/0 dark:group-hover/card:bg-brass-500/40" />
 
       <div className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover/card:border-brass-500/40' : ''}`}>
         <div className="aspect-[4/5] overflow-hidden">
