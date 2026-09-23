@@ -27,19 +27,28 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
       <div
         className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover/card:border-brass-500/40' : ''} aspect-[16/9] sm:aspect-[4/5]`}
       >
-        {/* Background gradient */}
-        <div
-          className="absolute inset-0 opacity-90 transition-transform duration-500 group-hover/card:scale-105"
-          style={{ backgroundImage: `linear-gradient(135deg, ${format.gradient[0]}, ${format.gradient[1]})` }}
-        />
-        {/* Sample art peeking */}
-        <div className="absolute bottom-0 right-0 flex items-end justify-end gap-1 overflow-hidden p-3 opacity-40 h-1/2 w-1/2">
-          {sample.map((p) => (
-            <div key={p.id} className="h-full flex-1 overflow-hidden rounded-sm">
-              <Artwork palette={p.palette} motif={p.motif} seed={p.id} className="h-full w-full" />
+        {/* Background: real photo if provided, otherwise gradient fallback */}
+        {format.image ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-90 transition-transform duration-500 group-hover/card:scale-105"
+            style={{ backgroundImage: `url(${format.image})` }}
+          />
+        ) : (
+          <>
+            <div
+              className="absolute inset-0 opacity-90 transition-transform duration-500 group-hover/card:scale-105"
+              style={{ backgroundImage: `linear-gradient(135deg, ${format.gradient[0]}, ${format.gradient[1]})` }}
+            />
+            {/* Sample art peeking — only shown for the gradient fallback */}
+            <div className="absolute bottom-0 right-0 flex items-end justify-end gap-1 overflow-hidden p-3 opacity-40 h-1/2 w-1/2">
+              {sample.map((p) => (
+                <div key={p.id} className="h-full flex-1 overflow-hidden rounded-sm">
+                  <Artwork palette={p.palette} motif={p.motif} seed={p.id} className="h-full w-full" />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Gray overlay when unavailable */}
