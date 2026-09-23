@@ -20,11 +20,11 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
   {/* Aurora — slow drifting color blobs, on top so they glow through the dark overlay */}
-  <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-70 mix-blend-screen">
-    <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
-    <div className="aurora-blob aurora-blob-2" style={{ background: '#1E3A8A' }} />
-    <div className="aurora-blob aurora-blob-3" style={{ background: '#7C2D12' }} />
-  </div>
+  {/* Aurora — slow drifting color blobs, on top so they glow through the dark overlay */}
+<div className="pointer-events-none absolute inset-0 overflow-hidden opacity-25 mix-blend-soft-light">
+  <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
+  <div className="aurora-blob aurora-blob-2" style={{ background: '#7C2D12' }} />
+</div>
 </div>
   
         <div className="shell relative flex min-h-[88vh] flex-col justify-center py-24 sm:py-20">
@@ -65,47 +65,35 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <style>{`
-          .aurora-blob {
-            position: absolute;
-            width: 45vw;
-            height: 45vw;
-            max-width: 600px;
-            max-height: 600px;
-            border-radius: 50%;
-            filter: blur(90px);
-          }
-          .aurora-blob-1 {
-            top: -10%;
-            left: -5%;
-            animation: auroraDrift1 22s ease-in-out infinite;
-          }
-          .aurora-blob-2 {
-            top: 30%;
-            right: -10%;
-            animation: auroraDrift2 26s ease-in-out infinite;
-          }
-          .aurora-blob-3 {
-            bottom: -15%;
-            left: 20%;
-            animation: auroraDrift3 30s ease-in-out infinite;
-          }
-          @keyframes auroraDrift1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(8%, 12%) scale(1.15); }
-            66% { transform: translate(-5%, 6%) scale(0.9); }
-          }
-          @keyframes auroraDrift2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-10%, 8%) scale(0.9); }
-            66% { transform: translate(6%, -10%) scale(1.2); }
-          }
-          @keyframes auroraDrift3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(10%, -8%) scale(1.1); }
-            66% { transform: translate(-8%, -5%) scale(0.95); }
-          }
-        `}</style>
+       <style>{`
+  .aurora-blob {
+    position: absolute;
+    width: 22vw;
+    height: 22vw;
+    max-width: 320px;
+    max-height: 320px;
+    border-radius: 50%;
+    filter: blur(110px);
+  }
+  .aurora-blob-1 {
+    top: 5%;
+    right: 5%;
+    animation: auroraDrift1 24s ease-in-out infinite;
+  }
+  .aurora-blob-2 {
+    bottom: 5%;
+    left: 30%;
+    animation: auroraDrift2 28s ease-in-out infinite;
+  }
+  @keyframes auroraDrift1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-6%, 8%) scale(1.15); }
+  }
+  @keyframes auroraDrift2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(6%, -6%) scale(0.9); }
+  }
+`}</style>
       </section>
 
       {/* FORMATS — top-level print format cards */}
