@@ -390,23 +390,28 @@ export function availableVariants(product: Product): VariantType[] {
   return v;
 }
 
-// Product code format: SIZECODE-CATCODE-NN-V[-BORDER]
 // ============================================================
 //  PRODUCT CODE — customer-facing code shown on product page,
 //  cart, checkout, order email, sheets, and saved orders.
 //
-//  Built directly from the product's stable id (e.g. "p017"),
-//  the chosen size, and the chosen variant. A border color
-//  segment is added ONLY for the "framed" variant — canvas
-//  (normal or square) and metal never have one, since they
-//  don't offer a color choice.
+//  FORMAT:   ID-SIZE-VARIANT[-COLOR]
 //
-//  Examples:
-//    Framed, A4, white border      -> P017-A4-F-WHI
-//    Square framed, 8x8, black     -> P092-8X8-F-BLK
-//    Canvas, 8x12 (no color)       -> P017-8X12-C
-//    Square canvas, 12x12 (no color)-> P092-12X12-C
-//    Metal, 12x18 (no color)       -> P045-12X18-M
+//    ID       the product's stable id, uppercased   (p017 -> P017)
+//    SIZE     the chosen size, uppercased            (a4 -> A4, 8x12 -> 8X12)
+//    VARIANT  F = framed · C = canvas · M = metal
+//    COLOR    first 3 letters of the border color —
+//             ONLY present for the "framed" variant.
+//             Canvas (normal or square) and metal never
+//             offer a color choice, so this segment is
+//             just left off for them.
+//
+//  EXAMPLES:
+//    ID     SIZE     VARIANT  COLOR   RESULT
+//    p017   A4       framed   white   P017-A4-F-WHI
+//    p092   8x8      framed   black   P092-8X8-F-BLK
+//    p017   8x12     canvas   —       P017-8X12-C
+//    p092   12x12    canvas   —       P092-12X12-C
+//    p045   12x18    metal    —       P045-12X18-M
 // ============================================================
 export function productCode(
   product: Product,
