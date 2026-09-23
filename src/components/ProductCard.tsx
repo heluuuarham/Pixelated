@@ -1,3 +1,4 @@
+import { useTheme } from '@/context/ThemeContext';
 import { Link } from 'react-router-dom';
 import { type Product, startingPrice, availableVariants } from '@/products';
 import { formatPrice, getCategory } from '@/config';
@@ -8,13 +9,18 @@ export default function ProductCard({ product }: { product: Product }) {
   const cat = getCategory(product.category);
   const variants = availableVariants(product);
   const available = isProductAvailable(product);
+  const { theme } = useTheme();
+
   return (
     <Link
       to={`/product/${product.id}`}
       className="group/card relative block transition-all duration-300 group-hover/list:opacity-50 hover:!opacity-100 hover:!scale-[1.02] hover:z-10"
     >
       {/* Glow */}
-      <div className="pointer-events-none absolute -inset-3 rounded-lg bg-blue-900/0 blur-2xl transition-all duration-500 group-hover/card:bg-blue-900/50 dark:bg-brass-500/0 dark:group-hover/card:bg-brass-500/40" />
+      <div
+        className="pointer-events-none absolute -inset-3 rounded-lg blur-2xl transition-all duration-500 opacity-0 group-hover/card:opacity-100"
+        style={{ background: theme === 'dark' ? '#C9A24B' : '#4338CA' }}
+      />
 
       <div className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover/card:border-brass-500/40' : ''}`}>
         <div className="aspect-[4/5] overflow-hidden">
