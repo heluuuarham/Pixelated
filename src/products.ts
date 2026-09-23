@@ -391,12 +391,40 @@ export function availableVariants(product: Product): VariantType[] {
 }
 
 // Product code format: SIZECODE-CATCODE-NN-V[-BORDER]
-export function productCode(categoryCode: string, index: number, sizeId: string, variant: string, borderColorId?: string): string {
-  const sizeCode = sizeId.toUpperCase().replace('X', '×').slice(0, 3);
-  const n = String(index).padStart(2, '0');
-  const v = variant === 'framed' ? 'F' : variant === 'canvas' ? 'C' : 'M';
-  const bc = borderColorId ? `-${borderColorId.slice(0, 3).toUpperCase()}` : '';
-  return `${sizeCode}-${categoryCode}-${n}-${v}${bc}`;
+// ============================================================
+//  PRODUCT CODE — customer-facing code shown on product page,
+//  cart, checkout, order email, sheets, and saved orders.
+//
+//  Built directly from the product's stable id (e.g. "p017"),
+//  the chosen size, and the chosen variant. A border color
+//  segment is added ONLY for the "framed" variant — canvas
+//  (normal or square) and metal never have one, since they
+//  don't offer a color choice.
+//
+//  Examples:
+//    Framed, A4, white border      -> P017-A4-F-WHI
+//    Square framed, 8x8, black     -> P092-8X8-F-BLK
+//    Canvas, 8x12 (no color)       -> P017-8X12-C
+//    Square canvas, 12x12 (no color)-> P092-12X12-C
+//    Metal, 12x18 (no color)       -> P045-12X18-M
+// ============================================================
+export function productCode(
+  product: Product,
+  variant: VariantType,
+  sizeId: string,
+  borderColorId?: string,
+): string {
+  const idPart = product.id.toUpperCase(); // "p017" -> "P017"
+  const sizePart = sizeId.toUpperCase();   // "a4" -> "A4", "8x12" -> "8X12"
+  const variantLetter = variant === 'framed' ? 'F' : variant === 'canvas' ? 'C' : 'M';
+
+  // Only the framed variant has a border color — canvas and metal never do.
+  const colorPart =
+    variant === 'framed' && borderColorId
+      ? `-${borderColorId.slice(0, 3).toUpperCase()}`
+      : '';
+
+  return `${idPart}-${sizePart}-${variantLetter}${colorPart}`;
 }
 
 // Pricing: base size price + optional border color modifier
