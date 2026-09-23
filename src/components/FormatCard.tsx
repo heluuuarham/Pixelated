@@ -20,7 +20,7 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
       {/* Glow */}
       <div
   className="pointer-events-none absolute -inset-3 rounded-lg blur-2xl transition-all duration-500 opacity-0 group-hover/card:opacity-100"
-  style={{ background: theme === 'dark' ? '#C9A24B' : '#4338CA' }}
+  style={{ background: theme === 'dark' ? '#C9A24B' : '#1C2B45' }}
 />
 
       
