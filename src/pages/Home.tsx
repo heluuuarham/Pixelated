@@ -14,22 +14,25 @@ export default function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-
-        <div className="absolute inset-0">
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    poster="/og-preview.jpg"
-    className="h-full w-full object-cover"
-  >
-    <source src="/videos/hero-loop.mp4" type="video/mp4" />
-  </video>
-  <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-</div>
+              <div className="shell relative flex min-h-[88vh] flex-col justify-center py-24 sm:py-20">
+          <div className="max-w-2xl">
+            <p className="eyebrow animate-fadeUp !text-brass-400">Premium Wall Art Prints</p>
+            <h1 className="mt-4 font-display text-6xl leading-[0.9] text-white sm:text-7xl md:text-8xl" style={{ animationDelay: '0.1s' }}>
+              Wall Art<br />That Speaks.
+            </h1>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/80" style={{ animationDelay: '0.2s' }}>
+              Anime, movies, sports, home decor, Marvel/DC, custom prints and garage art — on frames, canvas, metal and posters. Built for your walls.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3 sm:mt-8" style={{ animationDelay: '0.3s' }}>
+              <Link to="/categories/frames-canvas" className="btn-brass">
+                Shop All Collections <ArrowRight size={16} />
+              </Link>
+              <Link to="/category/custom-prints" className="btn-ghost !text-white !border-white/40 hover:!bg-white/10">
+                Create Custom Print
+              </Link>
+            </div>
+          </div>
+        </div>
   
         <div className="shell relative flex min-h-[88vh] flex-col justify-center py-24 sm:py-20">
           <div className="max-w-2xl">
