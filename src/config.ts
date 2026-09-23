@@ -28,9 +28,9 @@ export const paymentConfig = {
   // Advance payment details shown on the checkout page
   raast: {
     qrImage: '/payment/raast-qr.png',
-    accountName: 'Pixelated Store',
-    accountNumber: '03001234567',
-    methodLabel: 'JazzCash',
+    accountName: 'Muhammad Umar',
+    accountNumber: '03123829280',
+    methodLabel: 'sadapay & nayapay',
   },
 };
 
