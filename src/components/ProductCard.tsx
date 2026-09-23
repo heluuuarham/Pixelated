@@ -9,10 +9,16 @@ export default function ProductCard({ product }: { product: Product }) {
   const variants = availableVariants(product);
   const available = isProductAvailable(product);
   return (
-    <Link to={`/product/${product.id}`} className="group block">
-      <div className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover:border-brass-500/40' : ''}`}>
+    <Link
+      to={`/product/${product.id}`}
+      className="group/card relative block transition-all duration-300 group-hover/list:opacity-50 hover:!opacity-100 hover:!scale-[1.02] hover:z-10"
+    >
+      {/* Glow */}
+      <div className="pointer-events-none absolute -inset-1 rounded-sm bg-brass-500/0 blur-xl transition-all duration-300 group-hover/card:bg-brass-500/25" />
+
+      <div className={`relative overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'group-hover/card:border-brass-500/40' : ''}`}>
         <div className="aspect-[4/5] overflow-hidden">
-          <ProductPhoto product={product} className="h-full w-full transition-transform duration-500 group-hover:scale-105" />
+          <ProductPhoto product={product} className="h-full w-full transition-transform duration-500 group-hover/card:scale-105" />
         </div>
 
         {/* Gray overlay when unavailable */}
@@ -21,7 +27,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
 
         {available ? (
-        <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 opacity-0 transition-all duration-300 group-hover/card:translate-y-0 group-hover/card:opacity-100">
           <span className="inline-flex items-center gap-1.5 rounded-sm bg-brass-500 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-workshop-900">View Print</span>
         </div>
         ) : (
@@ -41,7 +47,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
       <div className="mt-3.5 sm:mt-3">
-        <h3 className={`font-display text-base leading-tight transition-colors ${available ? 'text-ink-50 group-hover:text-brass-400' : 'text-ink-400'}`}>{product.name}</h3>
+        <h3 className={`font-display text-base leading-tight transition-colors ${available ? 'text-ink-50 group-hover/card:text-brass-400' : 'text-ink-400'}`}>{product.name}</h3>
         <p className="mt-1 line-clamp-1 text-xs text-ink-400 sm:mt-0.5">{product.description}</p>
         <p className="mt-2 font-mono text-xs text-ink-300 sm:mt-1.5">From <span className={`font-bold ${available ? 'text-ink-50' : 'text-ink-400'}`}>{formatPrice(startingPrice(product))}</span></p>
       </div>
