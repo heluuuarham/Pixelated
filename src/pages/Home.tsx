@@ -17,6 +17,12 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Artwork palette={heroArt.palette} motif={heroArt.motif} seed="hero" className="h-full w-full" rounded={false} />
+          {/* Aurora — slow drifting color blobs, no mouse/video needed */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-60 mix-blend-screen">
+            <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
+            <div className="aurora-blob aurora-blob-2" style={{ background: '#1E3A8A' }} />
+            <div className="aurora-blob aurora-blob-3" style={{ background: '#7C2D12' }} />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </div>
@@ -58,6 +64,47 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <style>{`
+          .aurora-blob {
+            position: absolute;
+            width: 45vw;
+            height: 45vw;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            filter: blur(90px);
+          }
+          .aurora-blob-1 {
+            top: -10%;
+            left: -5%;
+            animation: auroraDrift1 22s ease-in-out infinite;
+          }
+          .aurora-blob-2 {
+            top: 30%;
+            right: -10%;
+            animation: auroraDrift2 26s ease-in-out infinite;
+          }
+          .aurora-blob-3 {
+            bottom: -15%;
+            left: 20%;
+            animation: auroraDrift3 30s ease-in-out infinite;
+          }
+          @keyframes auroraDrift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(8%, 12%) scale(1.15); }
+            66% { transform: translate(-5%, 6%) scale(0.9); }
+          }
+          @keyframes auroraDrift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-10%, 8%) scale(0.9); }
+            66% { transform: translate(6%, -10%) scale(1.2); }
+          }
+          @keyframes auroraDrift3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(10%, -8%) scale(1.1); }
+            66% { transform: translate(-8%, -5%) scale(0.95); }
+          }
+        `}</style>
       </section>
 
       {/* FORMATS — top-level print format cards */}
