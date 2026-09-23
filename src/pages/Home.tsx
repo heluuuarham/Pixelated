@@ -5,7 +5,7 @@ import { allFormatCategories } from '@/availability';
 import FormatCard from '@/components/FormatCard';
 import ProductCard from '@/components/ProductCard';
 import Artwork from '@/components/Artwork';
-import { ArrowRight, Truck, Shield, Palette, Sparkles } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Palette, Sparkles, Frame, Image as ImageIcon } from 'lucide-react';
 
 export default function Home() {
   const featured = products.filter((p) => p.inStock).slice(0, 8);
@@ -142,11 +142,13 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4 sm:gap-3">
               {[
-                { name: 'Framed', desc: 'Glass front + border color', color: '#475569' },
-                { name: 'Canvas', desc: 'Wooden frame, gallery-wrapped', color: '#92400E' },
+                { name: 'Framed', desc: 'Glass front + border color', icon: Frame },
+                { name: 'Canvas', desc: 'Wooden frame, gallery-wrapped', icon: ImageIcon },
               ].map((m) => (
                 <div key={m.name} className="rounded-sm border border-ink-100/10 p-4 text-center">
-                  <div className="mx-auto mb-3 h-16 w-16 rounded-full" style={{ background: m.color }} />
+                  <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-brass-500/10">
+                    <m.icon size={26} className="text-brass-400" />
+                  </div>
                   <p className="font-display text-lg text-ink-50">{m.name}</p>
                   <p className="mt-1 text-[11px] text-ink-400">{m.desc}</p>
                 </div>
