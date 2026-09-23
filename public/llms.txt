@@ -1,0 +1,13 @@
+# Pixelated
+
+> Pixelated is a Karachi, Pakistan-based print shop selling wall art on glass-front frames, gallery-wrapped canvas, and brushed metal posters. Designs span anime, movies, sports, home decor, garage/automotive, and Marvel/DC-style art, plus fully custom prints from a customer's own photo, logo, or text. Delivery across Pakistan, cash on delivery or advance payment.
+
+## Shop
+- [All products](https://pixelatedpk.vercel.app/shop)
+- [Frames & Canvas](https://pixelatedpk.vercel.app/category/anime)
+- [Square Format Frames & Canvas](https://pixelatedpk.vercel.app/category/sq-anime)
+- [Metal Posters](https://pixelatedpk.vercel.app/category/metal-anime)
+- [Custom Prints](https://pixelatedpk.vercel.app/category/custom-prints)
+
+## Info
+- [Terms & Conditions](https://pixelatedpk.vercel.app/terms)
