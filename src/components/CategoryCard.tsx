@@ -66,7 +66,7 @@ export default function CategoryCard({ category, large = false }: { category: Ca
             </span>
           </div>
           <div>
-            <p className="eyebrow mb-1">{category.tagline}</p>
+            <p className="eyebrow mb-1" style={{ color: '#e8b04b' }}>{category.tagline}</p>
             <h3 className={`font-display leading-[0.95] text-white ${large ? 'text-5xl md:text-7xl' : 'text-3xl'}`}>{category.name}</h3>
             {large && <p className="mt-3 max-w-md text-sm text-white/80">{category.description}</p>}
           </div>
