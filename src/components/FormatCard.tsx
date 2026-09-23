@@ -13,7 +13,7 @@ export default function FormatCard({ format }: { format: FormatCategory }) {
   return (
     <Link to={link} className="group block">
       <div
-        className={`group relative block overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'hover:border-brass-500/40' : ''} aspect-[4/5]`}
+        className={`group relative block overflow-hidden rounded-sm border border-ink-100/10 bg-workshop-800 transition-all duration-300 ${available ? 'hover:border-brass-500/40' : ''} aspect-[16/9] sm:aspect-[4/5]`}
       >
         {/* Background gradient */}
         <div
