@@ -15,16 +15,20 @@ export default function Home() {
     <div>
       {/* HERO */}
       <section className="relative overflow-hidden">
+
         <div className="absolute inset-0">
-  <Artwork palette={heroArt.palette} motif={heroArt.motif} seed="hero" className="h-full w-full" rounded={false} />
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    poster="/og-preview.jpg"
+    className="h-full w-full object-cover"
+  >
+    <source src="/videos/hero-loop.mp4" type="video/mp4" />
+  </video>
   <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/10" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-  {/* Aurora — slow drifting color blobs, on top so they glow through the dark overlay */}
-  {/* Aurora — slow drifting color blobs, on top so they glow through the dark overlay */}
-<div className="pointer-events-none absolute inset-0 overflow-hidden opacity-25 mix-blend-soft-light">
-  <div className="aurora-blob aurora-blob-1" style={{ background: '#C9A24B' }} />
-  <div className="aurora-blob aurora-blob-2" style={{ background: '#7C2D12' }} />
-</div>
 </div>
   
         <div className="shell relative flex min-h-[88vh] flex-col justify-center py-24 sm:py-20">
