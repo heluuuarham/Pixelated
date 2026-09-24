@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { formatCategories, site } from '@/config';
+import { categoriesByFormat, site } from '@/config';
 import { products, getFeaturedProducts } from '@/products';
-import { allFormatCategories } from '@/availability';
-import FormatCard from '@/components/FormatCard';
+import CategoryCard from '@/components/CategoryCard';
 import ProductCard from '@/components/ProductCard';
 import Artwork from '@/components/Artwork';
 import RequestItemBox from '@/components/RequestItemBox';
@@ -101,17 +100,17 @@ export default function Home() {
 `}</style>
       </section>
 
-      {/* FORMATS — top-level print format cards */}
+      {/* THEMES — category cards for the (now metal-only) catalog */}
       <section className="shell py-12 sm:py-16">
         <div className="mb-10 flex items-end justify-between sm:mb-8">
           <div>
-            <p className="eyebrow">Choose your format</p>
-            <h2 className="mt-2 font-display text-4xl text-ink-50 md:text-5xl">Print Formats</h2>
+            <p className="eyebrow">Shop by theme</p>
+            <h2 className="mt-2 font-display text-4xl text-ink-50 md:text-5xl">Browse Collections</h2>
           </div>
         </div>
-        <div className="grid gap-5 sm:gap-4 md:grid-cols-3">
-          {allFormatCategories().map((f) => (
-            <FormatCard key={f.slug} format={f} />
+        <div className="grid grid-cols-4 gap-5 sm:grid-cols-3 sm:gap-3">
+          {categoriesByFormat('metal-poster').map((c) => (
+            <CategoryCard key={c.slug} category={c} />
           ))}
         </div>
       </section>
