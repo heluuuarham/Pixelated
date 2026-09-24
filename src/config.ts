@@ -85,6 +85,12 @@ export const sizePresets: Record<string, ProductSize> = {
   mt_12x18: { id: 'mt_12x18', label: '12×18"', widthIn: 12, heightIn: 18, price: 2499 },
 };
 
+// Standard border colors used by the product page for each purchasable format.
+// The storefront currently sells metal posters only.
+export const standardBorderColors: Record<string, string> = {
+  metal: '#94A3B8',
+};
+
 // ============================================================
 //  CATEGORIES
 // ============================================================
@@ -175,3 +181,4 @@ export function categoriesByFormat(format: string): Category[] {
 export function formatPrice(n: number): string {
   return `${site.currency}${n.toLocaleString('en-PK')}`;
 }
+
