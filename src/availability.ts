@@ -43,8 +43,18 @@ export const categoryAvailability: Record<string, boolean> = {
   // Metal Poster
   'metal-anime': true,
   'metal-movies': true,
+  'metal-sports': true,
+  'metal-home-decor': true,
+  'metal-marvel-dc': true,
   'metal-custom': true,
   'metal-garage': true,
+
+  // Metal Poster — placeholders, not ready yet
+  'type-8': false,
+  'type-9': false,
+  'type-10': false,
+  'type-11': false,
+  'type-12': false,
 };
 
 // --- VARIANT-LEVEL TOGGLES (per category) ---
@@ -75,6 +85,9 @@ export const variantAvailability: Record<string, Partial<Record<string, boolean>
   // Metal Poster
   'metal-anime': {},
   'metal-movies': {},
+  'metal-sports': {},
+  'metal-home-decor': {},
+  'metal-marvel-dc': {},
   'metal-custom': {},
   'metal-garage': {},
 };
