@@ -31,7 +31,7 @@ export default function Header() {
         <nav className="hidden items-center gap-7 lg:flex">
           <NavLink to="/" end className="font-mono text-xs uppercase tracking-widest text-ink-300 hover:text-brass-400 transition-colors">Home</NavLink>
           <NavLink to="/categories" className="font-mono text-xs uppercase tracking-widest text-ink-300 hover:text-brass-400 transition-colors">Shop</NavLink>
-          {formatCategories.map((f) => (
+          {formatCategories.filter((f) => !f.hideFromNav).map((f) => (
             <NavLink
               key={f.slug}
               to={f.link ?? `/categories/${f.slug}`}
@@ -63,7 +63,7 @@ export default function Header() {
             <Link to="/" className="block py-3 font-mono text-sm uppercase tracking-widest text-ink-100 sm:py-2">Home</Link>
             <Link to="/categories" className="block py-3 font-mono text-sm uppercase tracking-widest text-ink-100 sm:py-2">Shop</Link>
             <div className="my-3 h-px bg-ink-100/10 sm:my-2" />
-            {formatCategories.map((f) => (
+            {formatCategories.filter((f) => !f.hideFromNav).map((f) => (
               <Link key={f.slug} to={f.link ?? `/categories/${f.slug}`} className="block py-3 text-sm text-ink-300 sm:py-2">
                 {f.name}
               </Link>
