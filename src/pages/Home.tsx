@@ -5,6 +5,7 @@ import { allFormatCategories } from '@/availability';
 import FormatCard from '@/components/FormatCard';
 import ProductCard from '@/components/ProductCard';
 import Artwork from '@/components/Artwork';
+import RequestItemBox from '@/components/RequestItemBox';
 import { ArrowRight, Truck, Shield, Palette, Sparkles, Frame, Image as ImageIcon } from 'lucide-react';
 
 export default function Home() {
@@ -168,6 +169,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* REQUEST A DESIGN — low-key, collapsed by default */}
+      <RequestItemBox />
     </div>
   );
 }
