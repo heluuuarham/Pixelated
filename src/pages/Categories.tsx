@@ -1,6 +1,7 @@
-import { categories, categoriesByFormat, formatCategories } from '@/config';
+import { formatCategories } from '@/config';
 import { allCategories } from '@/availability';
 import CategoryCard from '@/components/CategoryCard';
+import FormatCard from '@/components/FormatCard';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 
@@ -8,8 +9,8 @@ export default function Categories() {
   const { format } = useParams<{ format?: string }>();
   const fmt = format ? formatCategories.find((f) => f.slug === format) : undefined;
   const list = format ? allCategories(format) : allCategories();
-  const title = fmt?.name ?? 'All Collections';
-  const subtitle = fmt?.description ?? 'Six collections. 90+ designs. Each print available as a glass-front framed print or gallery-wrapped canvas, in your choice of size.';
+  const title = fmt?.name ?? 'Shop';
+  const subtitle = fmt?.description ?? 'Choose a metal poster collection or create something custom for your wall.';
 
   return (
     <div className="shell py-14 sm:py-12">
@@ -23,9 +24,15 @@ export default function Categories() {
         <h1 className="mt-2 font-display text-5xl text-ink-50 md:text-6xl">Shop {title}</h1>
         <p className="mt-4 max-w-2xl leading-relaxed text-ink-300 sm:mt-3">{subtitle}</p>
       </div>
-      <div className="grid gap-5 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {list.map((c) => <CategoryCard key={c.slug} category={c} />)}
-      </div>
+      {format ? (
+        <div className="grid gap-5 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {list.map((c) => <CategoryCard key={c.slug} category={c} />)}
+        </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2">
+          {formatCategories.map((f) => <FormatCard key={f.slug} format={f} />)}
+        </div>
+      )}
     </div>
   );
 }
