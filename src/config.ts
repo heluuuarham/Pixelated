@@ -70,25 +70,6 @@ export function getDeliveryFee(city: string): number {
 }
 
 // ============================================================
-//  BORDER COLORS — shared list used by framed products
-//  Products can use this default list (by omitting borderColors)
-//  or define their own custom list inline in products.ts.
-//  Edit this list to change the default available colors.
-// ============================================================
-export interface BorderColor {
-  id: string;
-  name: string;
-  hex: string;
-  priceModifier?: number; // optional, added to the size price
-}
-
-export const standardBorderColors: BorderColor[] = [
-  { id: 'black', name: 'Matte Black', hex: '#1a1a1a' },
-  { id: 'white', name: 'Ivory White', hex: '#F5F1E8' },
-  { id: 'gold', name: 'Antique Gold', hex: '#C9A24B', priceModifier: 200 },
-];
-
-// ============================================================
 //  SIZE PRESETS — products reference these by id, or define
 //  custom ProductSize objects inline in products.ts.
 // ============================================================
@@ -101,26 +82,7 @@ export interface ProductSize {
 }
 
 export const sizePresets: Record<string, ProductSize> = {
-  a5:    { id: 'a5',    label: 'A5 · 5.8×8.3"',   widthIn: 5.8,  heightIn: 8.3,  price: 1490 },
-  a4:    { id: 'a4',    label: 'A4 · 8.3×11.7"',  widthIn: 8.3,  heightIn: 11.7, price: 2490 },
-  a3:    { id: 'a3',    label: 'A3 · 11.7×16.5"', widthIn: 11.7, heightIn: 16.5, price: 3990 },
-  '12x16': { id: '12x16', label: '12×16"',        widthIn: 12,   heightIn: 16,   price: 3490 },
-  '16x20': { id: '16x20', label: '16×20"',        widthIn: 16,   heightIn: 20,   price: 4990 },
-  '18x24': { id: '18x24', label: '18×24"',        widthIn: 18,   heightIn: 24,   price: 6490 },
-  // Frames-canvas variant-specific sizes
-  fr_a4:   { id: 'fr_a4',   label: 'A4 · 8.3×11.7"',  widthIn: 8.3,  heightIn: 11.7, price: 1199 },
-  fr_a3:   { id: 'fr_a3',   label: 'A3 · 11.7×16.5"', widthIn: 11.7, heightIn: 16.5, price: 1399 },
-  cv_8x12:  { id: 'cv_8x12',  label: '8×12"',          widthIn: 8,    heightIn: 12,   price: 999 },
-  cv_12x18: { id: 'cv_12x18', label: '12×18"',          widthIn: 12,   heightIn: 18,   price: 1299 },
-  mt_12x18: { id: 'mt_12x18', label: '12×18"',       widthIn: 12,   heightIn: 18,   price: 2499 },
-  sq_8x8:  { id: 'sq_8x8',  label: '8×8"',           widthIn: 8,    heightIn: 8,    price: 1399 },
-  sq_12x12:{ id: 'sq_12x12',label: '12×12"',          widthIn: 12,   heightIn: 12,   price: 1599 },
-  // Square Frames & Canvas — framed sizes (8×8 and 12×12)
-  sqfr_8x8:   { id: 'sqfr_8x8',   label: '8×8"',   widthIn: 8,  heightIn: 8,  price: 1199 },
-  sqfr_12x12: { id: 'sqfr_12x12', label: '12×12"', widthIn: 12, heightIn: 12, price: 1399 },
-  // Square Frames & Canvas — canvas sizes (8×8 and 12×12)
-  sqcv_8x8:   { id: 'sqcv_8x8',   label: '8×8"',   widthIn: 8,  heightIn: 8,  price: 999 },
-  sqcv_12x12: { id: 'sqcv_12x12', label: '12×12"', widthIn: 12, heightIn: 12, price: 1299 },
+  mt_12x18: { id: 'mt_12x18', label: '12×18"', widthIn: 12, heightIn: 18, price: 2499 },
 };
 
 // ============================================================
@@ -136,14 +98,13 @@ export interface Category {
   motif: string;
   accent: string;
   comingSoon?: boolean;
-  format?: string; // 'frames-canvas' | 'square-frames-canvas' | 'metal-poster' — which format page this category belongs to
+  format?: string; // which format page this category belongs to
   image?: string; // optional real photo path/URL; falls back to gradient if omitted
 }
 
 // ============================================================
-//  FORMAT CATEGORIES — shown on the homepage as top-level cards.
-//  "Frames & Canvas" links to the theme categories page.
-//  Coming-soon formats are grayed out and not clickable.
+//  FORMAT / CATEGORY CATALOG
+//  Pixelated is currently a metal-poster-only storefront.
 // ============================================================
 export interface FormatCategory {
   slug: string;
@@ -155,52 +116,52 @@ export interface FormatCategory {
   accent: string;
   comingSoon?: boolean;
   link?: string;
-  image?: string; // optional real photo path/URL; falls back to gradient if omitted
-  hideFromNav?: boolean; // true = keep the route working, just don't show it in the header nav or homepage format picker
+  image?: string;
+  hideFromNav?: boolean;
 }
 
 export const formatCategories: FormatCategory[] = [
-  { slug: 'frames-canvas', name: 'Frames & Canvas', tagline: 'Glass-front framed prints & gallery-wrapped canvas.', description: 'Every design is available as a glass-front framed print with your choice of border color, or as a gallery-wrapped canvas on a wooden frame. Premium materials, made to order.', gradient: ['#12233A', '#2A3F5E'], motif: 'shield', accent: '#C9A24B', link: '/categories/frames-canvas', image: '/images/formats/frames-canvas.jpg', hideFromNav: true },
-  { slug: 'square-frames-canvas', name: 'Square Format Frames & Canvas', tagline: 'Square-format framed prints & canvas.', description: 'The same great designs in a square format — glass-front framed prints with your choice of border color, or gallery-wrapped canvas on a wooden frame. Available in 8×8 and 12×12.', gradient: ['#1A3A5C', '#2D5A87'], motif: 'shield', accent: '#5B9BD5', link: '/categories/square-frames-canvas', image: '/images/formats/square-frames-canvas.jpg', hideFromNav: true },
-  { slug: 'metal-poster', name: 'Metal Poster', tagline: 'Brushed aluminium prints with vivid color.', description: 'High-contrast prints on brushed aluminium — deep blacks, bright highlights, a modern edge.', gradient: ['#475569', '#1E293B'], motif: 'burst', accent: '#94A3B8', link: '/categories/metal-poster', image: '/images/formats/metal-poster.jpg' },
+  {
+    slug: 'metal-poster',
+    name: 'Metal Posters',
+    tagline: 'Brushed aluminium prints with vivid color.',
+    description: 'High-contrast prints on brushed aluminium — deep blacks, bright highlights, a modern edge.',
+    gradient: ['#475569', '#1E293B'],
+    motif: 'burst',
+    accent: '#94A3B8',
+    link: '/categories/metal-poster',
+    image: '/images/formats/metal-poster.jpg',
+    hideFromNav: true,
+  },
+  {
+    slug: 'custom-metal',
+    name: 'Custom Metal',
+    tagline: 'Put your own design on metal.',
+    description: 'Upload your photo, artwork or logo and turn it into a custom brushed-aluminium metal poster.',
+    gradient: ['#12233A', '#2A3F5E'],
+    motif: 'spark',
+    accent: '#C9A24B',
+    link: '/category/metal-custom',
+    image: '/images/categories/metal-custom.jpg',
+    hideFromNav: true,
+  },
 ];
 
 export const categories: Category[] = [
-  // ---- FRAMES & CANVAS categories ----
-  { slug: 'anime', name: 'Anime', code: 'ANI', tagline: 'From the frame to your wall.', description: 'Iconic moments from the series you live for — licensed-style poster art on premium metal, wood and canvas.', gradient: ['#3A1C71', '#D76D77'], motif: 'burst', accent: '#D76D77', format: 'frames-canvas' , image: '/images/categories/anime.jpg' },
-  { slug: 'movies', name: 'Movies', code: 'MOV', tagline: 'Cinema, framed.', description: 'Poster-grade artwork from the films that stayed with you. Cinematic colour, museum-grade print.', gradient: ['#0F2027', '#2C5364'], motif: 'film', accent: '#2C5364', format: 'frames-canvas' , image: '/images/categories/movies.jpg' },
-  { slug: 'sports', name: 'Sports', code: 'SPT', tagline: 'Legends, immortalised.', description: 'The moments that defined the game. Action poses, iconic stances, stadium silhouettes.', gradient: ['#F12711', '#F5AF19'], motif: 'chevron', accent: '#F5AF19', format: 'frames-canvas' , image: '/images/categories/sports.jpg' },
-  { slug: 'home-decor', name: 'Home Decor', code: 'DEC', tagline: 'Walls with warmth.', description: 'Botanicals, abstracts and minimalist line art designed to anchor a room.', gradient: ['#0B486B', '#56AB2F'], motif: 'leaf', accent: '#56AB2F', format: 'frames-canvas' , image: '/images/categories/home-decor.jpg' },
-  { slug: 'marvel-dc', name: 'Marvel / DC', code: 'MDC', tagline: 'Heroes, assembled.', description: 'Comic-book classics and cinematic key art from the universes you grew up with.', gradient: ['#ED213A', '#932503'], motif: 'shield', accent: '#ED213A', format: 'frames-canvas' , image: '/images/categories/marvel-dc.jpg' },
-  { slug: 'custom-prints', name: 'Custom Prints', code: 'CUS', tagline: 'Your wall, your story.', description: 'Upload your photo or artwork — we print it on your chosen material and size.', gradient: ['#12233A', '#2A3F5E'], motif: 'spark', accent: '#C9A24B', format: 'frames-canvas' , image: '/images/categories/custom-prints.jpg' },
-  { slug: 'garage', name: 'Garage', code: 'GAR', tagline: 'STRAIGHT FROM THE GARAGE', description: 'From classic muscle to modern hypercars — automotive art that captures speed, design, and the soul of the machine.', gradient: ['#1A1A2E', '#E94560'], motif: 'chevron', accent: '#E94560', format: 'frames-canvas' , image: '/images/categories/garage.jpg' },
-
-  // ---- METAL POSTER categories ----
-  { slug: 'metal-anime', name: 'Anime', code: 'MAN', tagline: 'From the frame to your wall.', description: 'Iconic anime moments on brushed aluminium — vivid color, deep blacks, a modern edge.', gradient: ['#3A1C71', '#D76D77'], motif: 'burst', accent: '#D76D77', format: 'metal-poster' , image: '/images/categories/metal-anime.jpg' },
-  { slug: 'metal-movies', name: 'Movies', code: 'MVM', tagline: 'Cinema, framed.', description: 'Cinematic artwork on brushed aluminium — poster-grade color with a metallic sheen.', gradient: ['#0F2027', '#2C5364'], motif: 'film', accent: '#2C5364', format: 'metal-poster' , image: '/images/categories/metal-movies.jpg' },
-  { slug: 'metal-custom', name: 'Custom Prints', code: 'MCU', tagline: 'Your wall, your story.', description: 'Upload your photo or artwork — we print it on brushed aluminium in your chosen size.', gradient: ['#12233A', '#2A3F5E'], motif: 'spark', accent: '#C9A24B', format: 'metal-poster' , image: '/images/categories/metal-custom.jpg' },
-  { slug: 'metal-garage', name: 'Garage', code: 'MGR', tagline: 'STRAIGHT FROM THE GARAGE', description: 'Automotive art on brushed aluminium — speed, design, and the soul of the machine, with a metallic edge.', gradient: ['#1A1A2E', '#E94560'], motif: 'chevron', accent: '#E94560', format: 'metal-poster' , image: '/images/categories/metal-garage.jpg' },
-
-  // ---- SQUARE FRAMES & CANVAS categories ----
-  { slug: 'sq-anime', name: 'Anime', code: 'SQA', tagline: 'From the frame to your wall.', description: 'Iconic anime moments in square format — glass-front framed prints or gallery-wrapped canvas.', gradient: ['#3A1C71', '#D76D77'], motif: 'burst', accent: '#D76D77', format: 'square-frames-canvas' , image: '/images/categories/sq-anime.jpg' },
-  { slug: 'sq-movies', name: 'Movies', code: 'SQM', tagline: 'Cinema, framed.', description: 'Cinematic artwork in square format — poster-grade colour, museum-grade print.', gradient: ['#0F2027', '#2C5364'], motif: 'film', accent: '#2C5364', format: 'square-frames-canvas' , image: '/images/categories/sq-movies.jpg' },
-  { slug: 'sq-sports', name: 'Sports', code: 'SQS', tagline: 'Legends, immortalised.', description: 'The moments that defined the game, in square format.', gradient: ['#F12711', '#F5AF19'], motif: 'chevron', accent: '#F5AF19', format: 'square-frames-canvas' , image: '/images/categories/sq-sports.jpg' },
-  { slug: 'sq-home-decor', name: 'Home Decor', code: 'SQD', tagline: 'Walls with warmth.', description: 'Botanicals, abstracts and minimalist line art in square format.', gradient: ['#0B486B', '#56AB2F'], motif: 'leaf', accent: '#56AB2F', format: 'square-frames-canvas' , image: '/images/categories/sq-home-decor.jpg' },
-  { slug: 'sq-marvel-dc', name: 'Marvel / DC', code: 'SQM', tagline: 'Heroes, assembled.', description: 'Comic-book classics and cinematic key art in square format.', gradient: ['#ED213A', '#932503'], motif: 'shield', accent: '#ED213A', format: 'square-frames-canvas' , image: '/images/categories/sq-marvel-dc.jpg' },
-  { slug: 'sq-custom-prints', name: 'Custom Prints', code: 'SQC', tagline: 'Your wall, your story.', description: 'Upload your photo or artwork — we print it in square format on your chosen material and size.', gradient: ['#12233A', '#2A3F5E'], motif: 'spark', accent: '#C9A24B', format: 'square-frames-canvas' , image: '/images/categories/sq-custom-prints.jpg' },
-  { slug: 'sq-garage', name: 'Garage', code: 'SQG', tagline: 'STRAIGHT FROM THE GARAGE', description: 'Automotive art in square format — speed, design, and the soul of the machine.', gradient: ['#1A1A2E', '#E94560'], motif: 'chevron', accent: '#E94560', format: 'square-frames-canvas' , image: '/images/categories/sq-garage.jpg' },
-
-  // ---- METAL POSTER categories added to match Frames & Canvas lineup ----
+  { slug: 'metal-anime', name: 'Anime', code: 'MAN', tagline: 'From the frame to your wall.', description: 'Iconic anime moments on brushed aluminium — vivid color, deep blacks, a modern edge.', gradient: ['#3A1C71', '#D76D77'], motif: 'burst', accent: '#D76D77', format: 'metal-poster', image: '/images/categories/metal-anime.jpg' },
+  { slug: 'metal-movies', name: 'Movies', code: 'MVM', tagline: 'Cinema, reimagined in metal.', description: 'Cinematic artwork on brushed aluminium — poster-grade color with a metallic sheen.', gradient: ['#0F2027', '#2C5364'], motif: 'film', accent: '#2C5364', format: 'metal-poster', image: '/images/categories/metal-movies.jpg' },
   { slug: 'metal-sports', name: 'Sports', code: 'MSP', tagline: 'Legends, immortalised.', description: 'The moments that defined the game, on brushed aluminium — action poses, iconic stances, stadium silhouettes.', gradient: ['#F12711', '#F5AF19'], motif: 'chevron', accent: '#F5AF19', format: 'metal-poster', image: '/images/categories/metal-sports.jpg' },
   { slug: 'metal-home-decor', name: 'Home Decor', code: 'MHD', tagline: 'Walls with warmth.', description: 'Botanicals, abstracts and minimalist line art, printed on brushed aluminium for a sharp, modern finish.', gradient: ['#0B486B', '#56AB2F'], motif: 'leaf', accent: '#56AB2F', format: 'metal-poster', image: '/images/categories/metal-home-decor.jpg' },
   { slug: 'metal-marvel-dc', name: 'Marvel / DC', code: 'MMD', tagline: 'Heroes, assembled.', description: 'Comic-book classics and cinematic key art on brushed aluminium — vivid color, deep blacks, a modern edge.', gradient: ['#ED213A', '#932503'], motif: 'shield', accent: '#ED213A', format: 'metal-poster', image: '/images/categories/metal-marvel-dc.jpg' },
+  { slug: 'metal-custom', name: 'Custom Prints', code: 'MCU', tagline: 'Your wall, your story.', description: 'Upload your photo or artwork — we print it on brushed aluminium in your chosen size.', gradient: ['#12233A', '#2A3F5E'], motif: 'spark', accent: '#C9A24B', format: 'metal-poster', image: '/images/categories/metal-custom.jpg' },
+  { slug: 'metal-garage', name: 'Garage', code: 'MGR', tagline: 'Straight from the garage.', description: 'Automotive art on brushed aluminium — speed, design, and the soul of the machine, with a metallic edge.', gradient: ['#1A1A2E', '#E94560'], motif: 'chevron', accent: '#E94560', format: 'metal-poster', image: '/images/categories/metal-garage.jpg' },
 
-  // ---- PLACEHOLDER METAL CATEGORIES — rename slug/name/etc once real designs are ready ----
-  { slug: 'type-8', name: 'Type #8', code: 'TY8', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
-  { slug: 'type-9', name: 'Type #9', code: 'TY9', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
-  { slug: 'type-10', name: 'Type #10', code: 'T10', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
-  { slug: 'type-11', name: 'Type #11', code: 'T11', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
-  { slug: 'type-12', name: 'Type #12', code: 'T12', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  // Five reserved slots keep the catalog at 12 cards. Rename these when the new collections are decided.
+  { slug: 'type-8', name: 'Type #8', code: 'TY8', tagline: 'Coming soon.', description: 'A new metal collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-9', name: 'Type #9', code: 'TY9', tagline: 'Coming soon.', description: 'A new metal collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-10', name: 'Type #10', code: 'T10', tagline: 'Coming soon.', description: 'A new metal collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-11', name: 'Type #11', code: 'T11', tagline: 'Coming soon.', description: 'A new metal collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-12', name: 'Type #12', code: 'T12', tagline: 'Coming soon.', description: 'A new metal collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
 ];
 
 export function getCategory(slug: string): Category | undefined {
