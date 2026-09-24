@@ -28,9 +28,9 @@ export const paymentConfig = {
   // Advance payment details shown on the checkout page
   raast: {
     qrImage: '/payment/raast-qr.png',
-    accountName: 'Muhammad Umar',
-    accountNumber: '03123829280',
-    methodLabel: 'sadapay & nayapay',
+    accountName: 'Pixelated Store',
+    accountNumber: '03001234567',
+    methodLabel: 'JazzCash',
   },
 };
 
@@ -40,25 +40,25 @@ export const paymentConfig = {
 //  The correct fee is shown at checkout based on selected city.
 // ============================================================
 export const deliveryFees: Record<string, number> = {
-  'Karachi': 250,
-  'Lahore': 250,
+  'Karachi': 150,
+  'Lahore': 200,
   'Islamabad': 250,
   'Rawalpindi': 250,
-  'Faisalabad': 250,
-  'Multan': 250,
-  'Peshawar': 250,
-  'Quetta': 250,
-  'Hyderabad': 250,
-  'Sialkot': 250,
-  'Gujranwala': 250,
-  'Bahawalpur': 250,
-  'Sukkur': 250,
-  'Mardan': 250,
+  'Faisalabad': 220,
+  'Multan': 280,
+  'Peshawar': 300,
+  'Quetta': 350,
+  'Hyderabad': 180,
+  'Sialkot': 230,
+  'Gujranwala': 230,
+  'Bahawalpur': 280,
+  'Sukkur': 300,
+  'Mardan': 320,
   'Sargodha': 250,
-  'Mirpur': 250,
-  'Abbottabad': 250,
-  'Muzaffarabad': 250,
-  'Rahim Yar Khan': 250,
+  'Mirpur': 300,
+  'Abbottabad': 320,
+  'Muzaffarabad': 350,
+  'Rahim Yar Khan': 300,
   'Sahiwal': 250,
 };
 export const defaultDeliveryFee = 300;
@@ -156,11 +156,12 @@ export interface FormatCategory {
   comingSoon?: boolean;
   link?: string;
   image?: string; // optional real photo path/URL; falls back to gradient if omitted
+  hideFromNav?: boolean; // true = keep the route working, just don't show it in the header nav or homepage format picker
 }
 
 export const formatCategories: FormatCategory[] = [
-  { slug: 'frames-canvas', name: 'Frames & Canvas', tagline: 'Glass-front framed prints & gallery-wrapped canvas.', description: 'Every design is available as a glass-front framed print with your choice of border color, or as a gallery-wrapped canvas on a wooden frame. Premium materials, made to order.', gradient: ['#12233A', '#2A3F5E'], motif: 'shield', accent: '#C9A24B', link: '/categories/frames-canvas', image: '/images/formats/frames-canvas.jpg' },
-  { slug: 'square-frames-canvas', name: 'Square Format Frames & Canvas', tagline: 'Square-format framed prints & canvas.', description: 'The same great designs in a square format — glass-front framed prints with your choice of border color, or gallery-wrapped canvas on a wooden frame. Available in 8×8 and 12×12.', gradient: ['#1A3A5C', '#2D5A87'], motif: 'shield', accent: '#5B9BD5', link: '/categories/square-frames-canvas', image: '/images/formats/square-frames-canvas.jpg' },
+  { slug: 'frames-canvas', name: 'Frames & Canvas', tagline: 'Glass-front framed prints & gallery-wrapped canvas.', description: 'Every design is available as a glass-front framed print with your choice of border color, or as a gallery-wrapped canvas on a wooden frame. Premium materials, made to order.', gradient: ['#12233A', '#2A3F5E'], motif: 'shield', accent: '#C9A24B', link: '/categories/frames-canvas', image: '/images/formats/frames-canvas.jpg', hideFromNav: true },
+  { slug: 'square-frames-canvas', name: 'Square Format Frames & Canvas', tagline: 'Square-format framed prints & canvas.', description: 'The same great designs in a square format — glass-front framed prints with your choice of border color, or gallery-wrapped canvas on a wooden frame. Available in 8×8 and 12×12.', gradient: ['#1A3A5C', '#2D5A87'], motif: 'shield', accent: '#5B9BD5', link: '/categories/square-frames-canvas', image: '/images/formats/square-frames-canvas.jpg', hideFromNav: true },
   { slug: 'metal-poster', name: 'Metal Poster', tagline: 'Brushed aluminium prints with vivid color.', description: 'High-contrast prints on brushed aluminium — deep blacks, bright highlights, a modern edge.', gradient: ['#475569', '#1E293B'], motif: 'burst', accent: '#94A3B8', link: '/categories/metal-poster', image: '/images/formats/metal-poster.jpg' },
 ];
 
@@ -188,6 +189,18 @@ export const categories: Category[] = [
   { slug: 'sq-marvel-dc', name: 'Marvel / DC', code: 'SQM', tagline: 'Heroes, assembled.', description: 'Comic-book classics and cinematic key art in square format.', gradient: ['#ED213A', '#932503'], motif: 'shield', accent: '#ED213A', format: 'square-frames-canvas' , image: '/images/categories/sq-marvel-dc.jpg' },
   { slug: 'sq-custom-prints', name: 'Custom Prints', code: 'SQC', tagline: 'Your wall, your story.', description: 'Upload your photo or artwork — we print it in square format on your chosen material and size.', gradient: ['#12233A', '#2A3F5E'], motif: 'spark', accent: '#C9A24B', format: 'square-frames-canvas' , image: '/images/categories/sq-custom-prints.jpg' },
   { slug: 'sq-garage', name: 'Garage', code: 'SQG', tagline: 'STRAIGHT FROM THE GARAGE', description: 'Automotive art in square format — speed, design, and the soul of the machine.', gradient: ['#1A1A2E', '#E94560'], motif: 'chevron', accent: '#E94560', format: 'square-frames-canvas' , image: '/images/categories/sq-garage.jpg' },
+
+  // ---- METAL POSTER categories added to match Frames & Canvas lineup ----
+  { slug: 'metal-sports', name: 'Sports', code: 'MSP', tagline: 'Legends, immortalised.', description: 'The moments that defined the game, on brushed aluminium — action poses, iconic stances, stadium silhouettes.', gradient: ['#F12711', '#F5AF19'], motif: 'chevron', accent: '#F5AF19', format: 'metal-poster', image: '/images/categories/metal-sports.jpg' },
+  { slug: 'metal-home-decor', name: 'Home Decor', code: 'MHD', tagline: 'Walls with warmth.', description: 'Botanicals, abstracts and minimalist line art, printed on brushed aluminium for a sharp, modern finish.', gradient: ['#0B486B', '#56AB2F'], motif: 'leaf', accent: '#56AB2F', format: 'metal-poster', image: '/images/categories/metal-home-decor.jpg' },
+  { slug: 'metal-marvel-dc', name: 'Marvel / DC', code: 'MMD', tagline: 'Heroes, assembled.', description: 'Comic-book classics and cinematic key art on brushed aluminium — vivid color, deep blacks, a modern edge.', gradient: ['#ED213A', '#932503'], motif: 'shield', accent: '#ED213A', format: 'metal-poster', image: '/images/categories/metal-marvel-dc.jpg' },
+
+  // ---- PLACEHOLDER METAL CATEGORIES — rename slug/name/etc once real designs are ready ----
+  { slug: 'type-8', name: 'Type #8', code: 'TY8', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-9', name: 'Type #9', code: 'TY9', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-10', name: 'Type #10', code: 'T10', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-11', name: 'Type #11', code: 'T11', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
+  { slug: 'type-12', name: 'Type #12', code: 'T12', tagline: 'Coming soon.', description: 'A new collection is on its way.', gradient: ['#334155', '#0F172A'], motif: 'spark', accent: '#94A3B8', format: 'metal-poster', comingSoon: true },
 ];
 
 export function getCategory(slug: string): Category | undefined {
